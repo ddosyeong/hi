@@ -1,75 +1,107 @@
-/* Base styles */
+/* Reset */
 body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+  margin: 0; padding: 0; height: 100%;
   font-family: serif;
 }
 
-/* Container takes full viewport height and starts with white bg */
+/* Container takes full viewport */
 .container {
   min-height: 100vh;
   background-color: white;
   transition: background-color 2s ease;
-  padding: 2rem;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
 }
 
-/* When checkbox is checked, change background to pink */
+/* Change background on checked */
 #messageState:checked ~ .container {
-  background-color: #f9d6db;
+  background-color: #f9d6db; /* pink */
+  justify-content: flex-start;
+  padding-top: 4rem;
 }
 
-/* The big red heart label */
+/* Instruction text centered initially */
+.instruction {
+  font-size: 1.5rem;
+  margin-bottom: 3rem;
+  opacity: 1;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  user-select: none;
+}
+
+/* Hide instructions on checked, slide up */
+#messageState:checked ~ .container .instruction {
+  opacity: 0;
+  transform: translateY(-50px);
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Heart styling */
 .heart {
-  font-size: 5rem; /* big heart */
+  font-size: 6rem;
   cursor: pointer;
   user-select: none;
+  transition: all 0.5s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+/* The heart image itself */
+.heart img {
+  width: 100px;
+  height: 100px;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* When not checked: heart centered below instructions */
+#messageState:not(:checked) ~ .container .heart {
+  margin-bottom: 0;
+}
+
+/* When checked: heart moves above message box */
+#messageState:checked ~ .container .heart {
   margin-bottom: 2rem;
-  display: block;
-  transition: transform 0.3s ease;
+  margin-top: 0;
 }
 
-/* Add a subtle "pop" effect when heart is clicked */
-#messageState:checked + .container .heart {
-  transform: scale(1.2);
-}
-
-/* Message box styling */
+/* Message styling */
 .message {
   max-width: 600px;
   background: #fff0f3;
-  padding: 2rem;
   border-radius: 8px;
+  padding: 2rem;
   box-shadow: 0 5px 15px rgba(0,0,0,0.15);
   font-size: 1rem;
   color: #222;
   line-height: 1.5;
-  opacity: 1;
-  transition: opacity 0.5s ease, max-height 0.5s ease;
-  overflow: hidden;
-  max-height: 2000px; /* big enough to fit content */
-}
-
-/* Initially hidden message */
-.message.closed {
   opacity: 0;
   max-height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
-  pointer-events: none;
-  margin: 0;
+  overflow: hidden;
+  transition: opacity 0.7s ease, max-height 0.7s ease, margin-top 0.7s ease;
+  margin-top: 0;
 }
 
-/* Show message when opened */
-#messageState:checked ~ .container .message.closed {
+/* Show message when checked */
+#messageState:checked ~ .container .message {
   opacity: 1;
-  max-height: 2000px;
+  max-height: 2000px; /* enough to show all content */
+  margin-top: 1rem;
   pointer-events: auto;
-  margin-top: 0;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+}
+
+/* Hide the checkbox */
+#messageState {
+  display: none;
 }
