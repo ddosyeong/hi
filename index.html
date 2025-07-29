@@ -1,100 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>HUHH HI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EEEEEEEHH</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      font-family: 'Georgia', serif;
+      transition: background-color 1.5s ease;
+    }
 
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
 
-  body {
-    margin: 0;
-    background-color: white;
-    font-family: 'Cinzel', serif;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    transition: background-color 2s ease;
-  }
+    .heart {
+      font-size: 80px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-  .container {
-    text-align: center;
-    width: 90vw;
-    max-width: 600px;
-    position: relative;
-  }
+    .heart:hover {
+      transform: scale(1.2);
+    }
 
-  .instruction {
-    font-size: 20px;
-    margin-bottom: 20px;
-    user-select: none;
-  }
+    .instruction {
+      font-size: 22px;
+      margin-top: 20px;
+      color: #e0245e; /* Bright red to match heart */
+    }
 
-  .heart {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  .heart img {
-    width: 100%;
-    height: 100%;
-    user-select: none;
-    pointer-events: none;
-  }
-  .heart:hover {
-    transform: scale(1.15);
-  }
-  .heart:active {
-    transform: scale(0.95);
-  }
+    .letter-box {
+      display: none;
+      max-width: 700px;
+      margin: 40px auto 80px auto;
+      background-color: #ffeef5;
+      border-radius: 12px;
+      padding: 30px 24px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      line-height: 1.8;
+      font-size: 18px;
+      text-align: justify;
+      animation: fadeIn 2s ease forwards;
+    }
 
-  .letter-box {
-    background: #f48fb1; /* pink background */
-    color: #4b1a33;
-    border-radius: 8px;
-    padding: 20px 25px;
-    margin-top: 25px;
-    font-size: 18px;
-    line-height: 1.6;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 2s ease, opacity 2s ease;
-  }
-  .letter-box.open {
-    max-height: 1200px; /* large enough to fit letter */
-    opacity: 1;
-  }
-  .letter-box p {
-    margin: 0;
-  }
-  .letter-box span.signature {
-    display: block;
-    text-align: right;
-    margin-top: 25px;
-    font-weight: 600;
-  }
-</style>
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+    @media (max-width: 500px) {
+      .letter-box {
+        padding: 20px 18px;
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<div class="container" role="main">
-  <p class="instruction" id="instruction-text">Click the heart!</p>
-
-  <div class="heart" tabindex="0" aria-label="Toggle letter">
-    <!-- Use a classic red heart SVG for crispness -->
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Red_heart.svg/1024px-Red_heart.svg.png" alt="heart icon" />
+  <div class="container" id="intro">
+    <div class="heart" id="heart">❤️</div>
+    <div class="instruction">Click the heart to open the letter</div>
   </div>
 
-  <div class="letter-box" aria-live="polite" aria-hidden="true" id="letter">
+  <div class="letter-box" id="letter">
     <p>
+      Dear <em>(Ate)</em> Vian,
+      <br><br>
       So, here it is… I like you—a lot. This might not seem like the right timing, but I have something special I want to share with you. Today, the 29th, marks the 9th month since I started liking you. I’ve been keeping this in for a long time, and I believe today is the right day to finally express it. I want to be honest about how I feel, for my own peace of mind, without expecting anything in return.
       <br><br>
       At first, I liked you simply because you're pretty. But as time passed, I got to know you more, and I started admiring you for much deeper reasons. I love how you're caring, joyful, kind, and full of positivity, even in rough times. You care for others—people, animals, even the small things that don't harm anyone—and that makes you even more special to me. Even though we haven’t interacted in person, my feelings have grown stronger the more I saw your heart.
@@ -119,36 +106,20 @@
       <br><br>
       This letter isn’t perfect—because it’s real. It came straight from my heart, without edits or polish. It might not be much, but I hope you’ll read it and understand how much you mean to me. Again, I know I probably stand no chance, but I had to try.
       <br><br>
-      <span class="signature">
-        With love,<br>
-        Brianna
-      </span>
+      <strong>With love,<br>Brianna</strong>
     </p>
   </div>
-</div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(function() {
-    const $heart = $('.heart');
-    const $letter = $('#letter');
-    const $body = $('body');
-    const $instruction = $('#instruction-text');
+  <script>
+    const heart = document.getElementById("heart");
+    const intro = document.getElementById("intro");
+    const letter = document.getElementById("letter");
 
-    $heart.on('click keypress', function(e) {
-      // Allow keyboard activation with Enter or Space
-      if(e.type === 'keypress' && e.key !== 'Enter' && e.key !== ' ') return;
-
-      const isOpen = $letter.hasClass('open');
-
-      if(!isOpen) {
-        // Open letter
-        $letter.addClass('open').attr('aria-hidden', 'false');
-        $body.css('background-color', '#f48fb1'); // pink background
-        $instruction.text('Here is my letter 💌');
-        // Move heart above letter visually by margin bottom adjustment
-        $heart.css('margin-bottom', '10px');
-      } else {
-        // Close letter
-        $letter.removeClass('open').attr('aria-hidden', 'true');
-        $body.css('background-color', 'white
+    heart.addEventListener("click", () => {
+      document.body.style.backgroundColor = "#fddbe5";
+      intro.style.display = "none";
+      letter.style.display = "block";
+    });
+  </script>
+</body>
+</html>
