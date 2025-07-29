@@ -1,22 +1,75 @@
-/* Default white background */
-body {
+/* Base styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: serif;
+}
+
+/* Container takes full viewport height and starts with white bg */
+.container {
+  min-height: 100vh;
   background-color: white;
-  transition: background-color 0.5s ease;
+  transition: background-color 2s ease;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* When checkbox is checked, change background to pink */
-#messageState:checked ~ .container body,
-#messageState:checked ~ .container {
-  background-color: #f9d6db; /* your pink */
-}
-
-/* To make this work reliably, apply the background color to the container instead */
-.container {
-  background-color: white;
-  min-height: 100vh;
-  transition: background-color 0.5s ease;
-}
-
 #messageState:checked ~ .container {
   background-color: #f9d6db;
+}
+
+/* The big red heart label */
+.heart {
+  font-size: 5rem; /* big heart */
+  cursor: pointer;
+  user-select: none;
+  margin-bottom: 2rem;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Add a subtle "pop" effect when heart is clicked */
+#messageState:checked + .container .heart {
+  transform: scale(1.2);
+}
+
+/* Message box styling */
+.message {
+  max-width: 600px;
+  background: #fff0f3;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  font-size: 1rem;
+  color: #222;
+  line-height: 1.5;
+  opacity: 1;
+  transition: opacity 0.5s ease, max-height 0.5s ease;
+  overflow: hidden;
+  max-height: 2000px; /* big enough to fit content */
+}
+
+/* Initially hidden message */
+.message.closed {
+  opacity: 0;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  pointer-events: none;
+  margin: 0;
+}
+
+/* Show message when opened */
+#messageState:checked ~ .container .message.closed {
+  opacity: 1;
+  max-height: 2000px;
+  pointer-events: auto;
+  margin-top: 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
