@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EEEEEEEHH</title>
+  <title>EEEEEEEEEEEEHHH</title>
   <style>
     body {
       margin: 0;
@@ -36,7 +36,7 @@
     .instruction {
       font-size: 22px;
       margin-top: 20px;
-      color: #e0245e; /* Bright red to match heart */
+      color: #e0245e;
     }
 
     .letter-box {
@@ -50,7 +50,22 @@
       line-height: 1.8;
       font-size: 18px;
       text-align: justify;
+      position: relative;
       animation: fadeIn 2s ease forwards;
+    }
+
+    .close-heart {
+      font-size: 80px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .close-heart:hover {
+      transform: translateX(-50%) scale(1.2);
     }
 
     @keyframes fadeIn {
@@ -79,6 +94,7 @@
   </div>
 
   <div class="letter-box" id="letter">
+    <div class="close-heart" id="closeHeart">❤️</div>
     <p>
       Dear <em>(Ate)</em> Vian,
       <br><br>
@@ -114,11 +130,18 @@
     const heart = document.getElementById("heart");
     const intro = document.getElementById("intro");
     const letter = document.getElementById("letter");
+    const closeHeart = document.getElementById("closeHeart");
 
     heart.addEventListener("click", () => {
       document.body.style.backgroundColor = "#fddbe5";
       intro.style.display = "none";
       letter.style.display = "block";
+    });
+
+    closeHeart.addEventListener("click", () => {
+      document.body.style.backgroundColor = "white";
+      letter.style.display = "none";
+      intro.style.display = "flex";
     });
   </script>
 </body>
