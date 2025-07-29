@@ -1,107 +1,42 @@
-/* Reset */
-body, html {
-  margin: 0; padding: 0; height: 100%;
-  font-family: serif;
-}
-
-/* Container takes full viewport */
-.container {
-  min-height: 100vh;
-  background-color: white;
-  transition: background-color 2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  box-sizing: border-box;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Change background on checked */
-#messageState:checked ~ .container {
-  background-color: #f9d6db; /* pink */
-  justify-content: flex-start;
-  padding-top: 4rem;
-}
-
-/* Instruction text centered initially */
-.instruction {
-  font-size: 1.5rem;
-  margin-bottom: 3rem;
-  opacity: 1;
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  user-select: none;
-}
-
-/* Hide instructions on checked, slide up */
-#messageState:checked ~ .container .instruction {
-  opacity: 0;
-  transform: translateY(-50px);
-  height: 0;
-  margin: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-/* Heart styling */
-.heart {
-  font-size: 6rem;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.5s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-}
-
-/* The heart image itself */
-.heart img {
-  width: 100px;
-  height: 100px;
-  user-select: none;
-  pointer-events: none;
-}
-
-/* When not checked: heart centered below instructions */
-#messageState:not(:checked) ~ .container .heart {
-  margin-bottom: 0;
-}
-
-/* When checked: heart moves above message box */
-#messageState:checked ~ .container .heart {
-  margin-bottom: 2rem;
-  margin-top: 0;
-}
-
-/* Message styling */
-.message {
-  max-width: 600px;
-  background: #fff0f3;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-  font-size: 1rem;
-  color: #222;
-  line-height: 1.5;
-  opacity: 0;
+/* Letter box container with scroll on overflow */
+.letter-box {
   max-height: 0;
-  overflow: hidden;
-  transition: opacity 0.7s ease, max-height 0.7s ease, margin-top 0.7s ease;
-  margin-top: 0;
+  overflow-y: auto; /* scroll vertically if content too tall */
+  width: 90vw;
+  max-width: 600px;
+  background: #ffe6f0; /* Light pink background */
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  padding: 0 20px;
+  margin-top: 20px;
+  opacity: 0;
+  transition:
+    max-height 1.2s ease,  /* slower rolling */
+    opacity 1.2s ease,
+    padding 1.2s ease;
+  /* Add some padding bottom so text won't get cut off by browser UI */
+  padding-bottom: 2rem;
+  /* Also add a small bottom margin for extra breathing space */
+  margin-bottom: 20px;
+  box-sizing: border-box;
 }
 
-/* Show message when checked */
-#messageState:checked ~ .container .message {
+/* Show letter box on open */
+#toggle:checked ~ .container .letter-box {
+  max-height: 1200px; /* enough to show letter */
   opacity: 1;
-  max-height: 2000px; /* enough to show all content */
-  margin-top: 1rem;
-  pointer-events: auto;
+  padding: 20px 20px 2rem; /* keep bottom padding */
 }
 
-/* Hide the checkbox */
-#messageState {
-  display: none;
+/* On smaller screens, limit max-height to viewport height minus some offset */
+@media (max-height: 700px) {
+  #toggle:checked ~ .container .letter-box {
+    max-height: calc(100vh - 150px);
+  }
+}
+
+/* Slow down the heart movement too for smoothness */
+#toggle:checked ~ .container .heart {
+  transform: translateY(-180px) scale(0.7);
+  transition: transform 1.2s ease;
 }
