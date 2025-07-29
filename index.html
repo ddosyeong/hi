@@ -3,116 +3,152 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>UHH?</title>
+<title>HUHH HI</title>
+
 <style>
-  body, html {
-    margin: 0; padding: 0;
-    height: 100%;
-    background: white;
-    font-family: serif;
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
+
+  body {
+    margin: 0;
+    background-color: white;
+    font-family: 'Cinzel', serif;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* avoid scrolling outside container */
+    height: 100vh;
+    overflow: hidden;
+    transition: background-color 2s ease;
   }
-  #toggle {
-    display: none;
-  }
+
   .container {
     text-align: center;
-    background: white;
-    padding: 1rem;
-    width: 100vw;
-    max-width: 600px;
-    height: 100vh;
-    box-sizing: border-box;
-    position: relative;
-  }
-  /* Heart styles */
-  .heart {
-    font-size: 5rem;
-    color: red;
-    cursor: pointer;
-    user-select: none;
-    transition: transform 1.2s ease;
-    position: relative;
-    top: 0;
-  }
-  /* When checked, move heart up */
-  #toggle:checked ~ .container .heart {
-    transform: translateY(-180px) scale(0.7);
-  }
-  /* Instruction text before open */
-  .instruction {
-    margin-top: 20px;
-    font-size: 1.1rem;
-    color: #333;
-  }
-  /* Letter container */
-  .letter-box {
-    margin: 0 auto;
-    margin-top: 20px;
-    background: #ffe6f0;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-    padding: 20px;
     width: 90vw;
     max-width: 600px;
+    position: relative;
+  }
 
+  .instruction {
+    font-size: 20px;
+    margin-bottom: 20px;
+    user-select: none;
+  }
+
+  .heart {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .heart img {
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    pointer-events: none;
+  }
+  .heart:hover {
+    transform: scale(1.15);
+  }
+  .heart:active {
+    transform: scale(0.95);
+  }
+
+  .letter-box {
+    background: #f48fb1; /* pink background */
+    color: #4b1a33;
+    border-radius: 8px;
+    padding: 20px 25px;
+    margin-top: 25px;
+    font-size: 18px;
+    line-height: 1.6;
     max-height: 0;
-    overflow-y: hidden;
+    overflow: hidden;
     opacity: 0;
-
-    transition:
-      max-height 1.2s ease,
-      opacity 1.2s ease,
-      padding 1.2s ease;
+    transition: max-height 2s ease, opacity 2s ease;
   }
-  /* Show letter when toggled */
-  #toggle:checked ~ .container .letter-box {
-    max-height: calc(100vh - 250px);
-    overflow-y: auto;
+  .letter-box.open {
+    max-height: 1200px; /* large enough to fit letter */
     opacity: 1;
-    padding: 20px;
   }
-  /* Scrollbar style for letter box */
-  .letter-box::-webkit-scrollbar {
-    width: 6px;
+  .letter-box p {
+    margin: 0;
   }
-  .letter-box::-webkit-scrollbar-thumb {
-    background-color: #ff99bb;
-    border-radius: 3px;
-  }
-
-  /* Background color change when open */
-  #toggle:checked ~ .container {
-    background: #ffe6f0;
+  .letter-box span.signature {
+    display: block;
+    text-align: right;
+    margin-top: 25px;
+    font-weight: 600;
   }
 </style>
+
 </head>
 <body>
 
-<input type="checkbox" id="toggle" />
-<div class="container">
-  <label for="toggle" class="heart">❤️</label>
-  <div class="instruction">Click the heart to open the letter</div>
+<div class="container" role="main">
+  <p class="instruction" id="instruction-text">Click the heart!</p>
 
-  <div class="letter-box" tabindex="0">
+  <div class="heart" tabindex="0" aria-label="Toggle letter">
+    <!-- Use a classic red heart SVG for crispness -->
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Red_heart.svg/1024px-Red_heart.svg.png" alt="heart icon" />
+  </div>
+
+  <div class="letter-box" aria-live="polite" aria-hidden="true" id="letter">
     <p>
+      So, here it is… I like you—a lot. This might not seem like the right timing, but I have something special I want to share with you. Today, the 29th, marks the 9th month since I started liking you. I’ve been keeping this in for a long time, and I believe today is the right day to finally express it. I want to be honest about how I feel, for my own peace of mind, without expecting anything in return.
+      <br><br>
+      At first, I liked you simply because you're pretty. But as time passed, I got to know you more, and I started admiring you for much deeper reasons. I love how you're caring, joyful, kind, and full of positivity, even in rough times. You care for others—people, animals, even the small things that don't harm anyone—and that makes you even more special to me. Even though we haven’t interacted in person, my feelings have grown stronger the more I saw your heart.
+      <br><br>
+      You’ve brought warmth into my life in a way I never expected. The little things you do—replying to my messages, remembering small moments—mean the world to me. The poems I sent? They were for you. The songs I posted as my Messenger notes? All for you. Even the “I Like U” by NIKI that you replied to was supposedly meant for you. When you asked who the “U” was, I didn’t mean an initial—I meant you. I’ve never been brave enough to say these things out loud until now. Your simple actions, even a reply, can make my entire day. On my birthday, the best gift I received was your greeting. That moment meant more than you can imagine—it was the day we started chatting again.
+      <br><br>
+      Then there was the MTAP awarding day. You tapped my shoulder and told me I was pretty. I didn’t say anything back, but inside, I was smiling like crazy. I don’t usually believe compliments, especially because I’m constantly compared to my sister at home. But for some reason, hearing it from you felt different—it stayed with me.
+      <br><br>
       Even though we don’t talk much in real life, I’ve come to like you more than I ever thought possible. I accept your imperfections, because you’ve accepted mine. Like you said, who are we to judge when we’re all flawed? I still remember November 29, 2024, when I confessed for the first time. I said it awkwardly, without preparation, but I meant every word.
+      <br><br>
+      You probably see your kindness as just a friendly gesture, and I understand that. But to me, it felt like something more—though I never let myself assume too much. You told me to try my best, no matter what the results. No one else believed in me like you did. I passed my exams because of your encouragement—you became my motivation.
+      <br><br>
+      You also talked to me about God, and that changed me. I now pray more often—for you and your family, too. You’ve helped shape me into a better version of myself, without even knowing it. I started to reflect on my actions, my choices, and I changed for the better. You’ve inspired growth in me, just by being who you are.
+      <br><br>
+      Now, when I ask myself why I like you, it’s not just because of how you look. It’s the way you make people feel seen, safe, and appreciated. You’re sweet, funny, smart, family-oriented, and supportive. You notice the good in others, even when it’s easier to see the bad. Your joyful presence brightens every room you’re in.
+      <br><br>
+      You might think I’m exaggerating or glazing, but I’m not. Others would agree with me if I asked. Honestly, I like you more than I like myself. I think about you all the time—it’s like you’ve taken over my thoughts. I like your flaws, your style, your worst days, and most of all—your smile.
+      <br><br>
+      I’ve accepted that my feelings might never be returned, and that’s okay. I just wanted to get this off my chest, so I don’t have to carry it silently anymore. Even if you like someone else now—like your new classmate—I’ll still be happy if you are. Your happiness matters to me, even if it means letting go of my own. Seeing you smile makes me smile.
+      <br><br>
+      Please know that I’m doing this out of my own will. Not saying it today would feel like a crime against myself. You helped me change, grow, and find parts of me I never knew existed. So thank you—for everything. I hope you stay kind, joyful, and never lose that beautiful smile of yours.
+      <br><br>
+      This letter isn’t perfect—because it’s real. It came straight from my heart, without edits or polish. It might not be much, but I hope you’ll read it and understand how much you mean to me. Again, I know I probably stand no chance, but I had to try.
+      <br><br>
+      <span class="signature">
+        With love,<br>
+        Brianna
+      </span>
     </p>
-    <p>
-      You probably see your kindness as just a friendly gesture, and I understand that. But to me, it felt like something more—though I never let myself assume too much. You told me to try my best, no matter what the results. No one else believed in me like you did. I pressed my wrong buttons, made my mistakes, but you never gave up on me.
-    </p>
-    <p>
-      For a long time, I never thought I deserved your attention or your compliments, especially because I’m constantly compared to my sister at home. But for some reason, hearing it from you felt different—it stayed with me.
-    </p>
-    <p>
-      You always tried to be there for me in your own way, and I want you to know that it means the world. Even if I don’t say it often, I appreciate every little thing you do. It’s helped me grow into a better person, even when I didn’t realize it.
-    </p>
-    <p>
-      I’m grateful for the moments we’ve shared, even the quiet ones. Sometimes silence speaks louder than words, and in those moments, I felt a connection with you that I didn’t expect.
-    </p>
-    <p>
-      This letter might be long, but it’s only because there’s so much I want you to know. You’re special to me, and I hope this helps you understand how I feel.
-    </p>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(function() {
+    const $heart = $('.heart');
+    const $letter = $('#letter');
+    const $body = $('body');
+    const $instruction = $('#instruction-text');
+
+    $heart.on('click keypress', function(e) {
+      // Allow keyboard activation with Enter or Space
+      if(e.type === 'keypress' && e.key !== 'Enter' && e.key !== ' ') return;
+
+      const isOpen = $letter.hasClass('open');
+
+      if(!isOpen) {
+        // Open letter
+        $letter.addClass('open').attr('aria-hidden', 'false');
+        $body.css('background-color', '#f48fb1'); // pink background
+        $instruction.text('Here is my letter 💌');
+        // Move heart above letter visually by margin bottom adjustment
+        $heart.css('margin-bottom', '10px');
+      } else {
+        // Close letter
+        $letter.removeClass('open').attr('aria-hidden', 'true');
+        $body.css('background-color', 'white
